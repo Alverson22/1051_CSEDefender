@@ -1,0 +1,27 @@
+package data;
+
+import static helpers.Artist.DrawQuadTex;
+import static helpers.Artist.HEIGHT;
+import static helpers.Artist.QuickLoad;
+import static helpers.Artist.WIDTH;
+
+import org.newdawn.slick.opengl.Texture;
+
+import UI.UI;
+
+public class Lose {
+	
+	private Texture background;
+	private UI loseUI;
+
+	public Lose(){
+		background = QuickLoad("lose");
+		loseUI = new UI();
+	}
+	
+	public void update(){
+		DrawQuadTex(background, 0, 0, 2048, 1024);
+		menuUI.draw();
+		updateButtons();
+	}
+}

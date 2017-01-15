@@ -1,0 +1,15 @@
+package data;
+
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class TowerCannonFire extends Tower { 
+
+	public TowerCannonFire(TowerType type, Tile startTile, CopyOnWriteArrayList<Enemy> enemies) {
+		super(type, startTile, enemies);
+	}
+	
+	@Override
+	public void shoot(Enemy target){
+		super.projectiles.add(new ProjectileFireBall(super.type.projectileType,super.target,super.getX(),super.getY(),32,32));
+	}
+}

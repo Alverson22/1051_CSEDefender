@@ -1,0 +1,118 @@
+package data;
+
+import static helpers.Artist.QuickLoad;
+
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import static helpers.Artist.DrawQuadTex;
+
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.opengl.Texture;
+
+import UI.UI;
+import UI.UI.Menu;
+import helpers.StateManager;
+import static helpers.Artist.*;
+
+public class Game {
+	private Random rand = new Random();
+	private TileGrid grid;
+	private Player player;
+	private WaveManager waveManager;
+	private UI gameUI;
+	private Menu towerPickerMenu;
+	private Texture menuBackground;
+	private Enemy[] enemyTypes;
+	private String questions[] = {"海大資工沒有哪位政治人物?  A.蔡英文  B.馬英九  C.歐巴馬",
+			"請問下列哪一隻貓不跟另外兩隻住在一起?  A.尾尾  B.薯條  C.哞哞 ",
+			"請問許維元教授最喜歡喝的飲料為何?  A.可樂  B.高寮  C.水",
+			"請問馬尚彬教授經歷了甚麼變化 = ?  A.變胖  B.變帥  C.變老"
+	};
+	private String answers[] = {"C", "B", "A", "B"};
+	private String answer;
+	
+	public Game(TileGrid grid){
+		this.grid = grid;
+		enemyTypes = new Enemy[3];
+		enemyTypes[0] = new EnemyAlien(2, 0, grid);
+		enemyTypes[1] = new EnemyUFO(2, 0, grid);
+		enemyTypes[2] = new EnemyPlane(2, 0, grid);
+		waveManager = new WaveManager(enemyTypes, 1, 3);
+		player = new Player(grid, waveManager);
+		player.setup();
+		this.menuBackground = QuickLoad("menu_background2");
+		setupUI();
+	}
+	
+	private void setupUI(){
+		gameUI = new UI();
+		
+		gameUI.createMenu("TowerPicker", 1280, 450, 192, 960, 2, 0);
+		towerPickerMenu = gameUI.getMenu("TowerPicker");
+		towerPickerMenu.quickAdd("IceCannon", "cannonIceBase2");
+		towerPickerMenu.quickAdd("BlueCannon", "cannonBase");
+		towerPickerMenu.quickAdd("RedCannon", "cannonBaseRed");
+		gameUI.addButton("Mission", "icon2", WIDTH / 2+575, (int)(HEIGHT * 0.15f));
+		
+	}
+	
+	private void updateUI(){
+		gameUI.draw();
+		gameUI.drawString(1320, 700, "Lives: " + Player.Lives);
+		gameUI.drawString(1320, 800, "Cash: " + Player.Cash);
+		gameUI.drawString(1320, 600, "Wave "+waveManager.getWaveNumber());
+		gameUI.drawString(0, 0, StateManager.framesInLastSecond+" fps");
+		if(Mouse.next()){
+			boolean mouseClicked = Mouse.isButtonDown(0);
+			if(mouseClicked)
+			{
+				if(towerPickerMenu.isButtonClicked("BlueCannon"))
+				{
+						player.pickTower(new TowerCannonBlue(TowerType.CannonBlue,grid.getTile(0, 0),waveManager.getCurrentWave().getEnemiyList()));
+				}
+				if(towerPickerMenu.isButtonClicked("IceCannon"))
+				{
+					player.pickTower(new TowerCannonIce(TowerType.CannonIce,grid.getTile(0, 0),waveManager.getCurrentWave().getEnemiyList()));
+				}
+				if(towerPickerMenu.isButtonClicked("RedCannon"))
+				{
+					player.pickTower(new TowerCannonFire(TowerType.CannonRed,grid.getTile(0, 0),waveManager.getCurrentWave().getEnemiyList()));
+				}
+			}
+		}
+	}
+	
+	public void updateButtons() {
+		if(Mouse.isButtonDown(0)) {
+			int i = rand.nextInt(4);
+			if(gameUI.isButtonClicked("Mission")) {
+				answer = JOptionPane.showInputDialog(questions[i]);
+				try {
+					answer = answer.toUpperCase();
+					if(answer.equals(answers[i])) {
+						JOptionPane.showMessageDialog(null, "你答對了 !! 獲得50塊~~", "通知", JOptionPane.QUESTION_MESSAGE);
+						player.modifyCash(50);
+					}
+					else
+						JOptionPane.showMessageDialog(null, "你答錯了 !!", "通知", JOptionPane.QUESTION_MESSAGE);
+						
+				} catch (NullPointerException e){
+					JOptionPane.showMessageDialog(null, "你錯失了賺取額外獎金的機會 !!", "通知", JOptionPane.QUESTION_MESSAGE);
+				}
+					gameUI.destroyMissionButton();
+			}
+		}
+	}
+	
+	public void update(){
+		DrawQuadTex(menuBackground, 1280, 0, 192, 960);
+		grid.draw();
+		waveManager.update();
+		player.update();
+		gameUI.draw();
+		updateUI();
+		updateButtons();
+	}
+}

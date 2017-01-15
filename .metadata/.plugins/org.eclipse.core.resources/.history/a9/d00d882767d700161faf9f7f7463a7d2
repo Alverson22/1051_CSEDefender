@@ -1,0 +1,72 @@
+package data;
+
+
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+
+import helpers.Clock;
+import helpers.Music;
+
+import static helpers.Artist.BeginSession;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import helpers.StateManager;
+
+public class Boot {
+	
+	public Boot()
+	{
+		
+		BeginSession();
+		Music.play();
+		
+		while(!Display.isCloseRequested()) {
+			class MouseHandler implements MouseListener
+			{
+
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					Music.mouseClick();
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO 自動產生的方法 Stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO 自動產生的方法 Stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO 自動產生的方法 Stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO 自動產生的方法 Stub
+					
+				}
+				
+			}
+			Clock.update();
+			StateManager.update();
+			Display.update();
+			Display.sync(60);
+		}
+		Music.close();
+		Display.destroy();
+	}
+	public static void main( String arg[] )
+	{
+		new Boot();
+	}
+}

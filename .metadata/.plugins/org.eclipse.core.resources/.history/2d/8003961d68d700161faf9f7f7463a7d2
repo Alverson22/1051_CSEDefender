@@ -1,0 +1,34 @@
+package data;
+
+
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+
+import helpers.Clock;
+import helpers.Music;
+
+import static helpers.Artist.BeginSession;
+import helpers.StateManager;
+
+public class Boot {
+	
+	public Boot()
+	{
+		
+		BeginSession();
+		Music.play();
+		
+		while(!Display.isCloseRequested()) {
+			Clock.update();
+			StateManager.update();
+			Display.update();
+			Display.sync(60);
+		}
+		Music.close();
+		Display.destroy();
+	}
+	public static void main( String arg[] )
+	{
+		new Boot();
+	}
+}

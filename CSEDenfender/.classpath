@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/lib/jars/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/lib/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/lib/jars/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/lib/jars/slick-util.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/lib/jars/jl1.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

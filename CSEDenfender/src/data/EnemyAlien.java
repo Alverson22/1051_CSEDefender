@@ -1,0 +1,12 @@
+package data;
+
+public class EnemyAlien extends Enemy{
+
+	public EnemyAlien(int tileX, int tileY, TileGrid grid) {
+		super(tileX, tileY, grid);
+		this.setTexture("enemyFloating_1");
+		this.setHealth(150);
+		this.setSpeed(200);
+	}
+
+}

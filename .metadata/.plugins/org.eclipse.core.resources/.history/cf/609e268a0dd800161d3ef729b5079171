@@ -1,0 +1,12 @@
+package data;
+
+import org.newdawn.slick.opengl.Texture;
+
+import UI.UI;
+
+public class Lose {
+	
+	private Texture background;
+	private UI loseUI;
+
+}
