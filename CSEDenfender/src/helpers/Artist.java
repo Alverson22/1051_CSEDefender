@@ -66,7 +66,7 @@ public class Artist {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/CSEDenfender/src/res/gam1088.png"));
+			image = ImageIO.read(new File("src/res/gam1088.png"));
 		} catch (IOException e1) {
 			// TODO 自動產生的 catch 區塊
 			e1.printStackTrace();

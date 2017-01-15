@@ -25,7 +25,7 @@ public class Music {
 	{
 		try
 		{
-			FileInputStream fis = new FileInputStream(new File("D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/CSEDenfender/src/res/BGM.mp3"));
+			FileInputStream fis = new FileInputStream(new File("src/res/BGM.mp3"));
 			player = new Player(fis);
 		} catch (Exception e)
 		{
@@ -51,7 +51,7 @@ public class Music {
 	public static void defeat () {
 		try
 		{
-			FileInputStream fis = new FileInputStream(new File("D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/CSEDenfender/src/res/Defeat.mp3"));
+			FileInputStream fis = new FileInputStream(new File("src/res/Defeat.mp3"));
 			defeat = new Player(fis);
 		} catch (Exception e)
 		{
@@ -77,7 +77,7 @@ public class Music {
 	public static void mouseClick () {
 		try
 		{
-			FileInputStream fis = new FileInputStream(new File("D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/CSEDenfender/src/res/click_one.mp3"));
+			FileInputStream fis = new FileInputStream(new File("src/res/click_one.mp3"));
 			mouse = new Player(fis);
 		} catch (Exception e)
 		{
@@ -103,7 +103,7 @@ public class Music {
 	public static void victory () {
 		try
 		{
-			FileInputStream fis = new FileInputStream(new File("D:/我的文件夾/桌面/JAVA/JAVA專題/workspace/CSEDenfender/src/res/Victory.mp3"));
+			FileInputStream fis = new FileInputStream(new File("src/res/Victory.mp3"));
 			victory = new Player(fis);
 		} catch (Exception e)
 		{
